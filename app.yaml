@@ -1,0 +1,16 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+libraries:
+- name: ssl
+  version: latest
+
+# [START handlers]
+handlers:
+- url: /html
+  static_dir: html
+  
+- url: /api/.*
+  script: main.app
+# [END handlers]

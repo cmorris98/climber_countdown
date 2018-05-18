@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="./bootstrap.min.css">
+        <link rel="stylesheet" href="./bootstrap-theme.min.css">
+        <link rel="stylesheet" href="./climber_countdown.css"/>
+
+        <title>Climber Countdown</title>
+    </head>
+    <body>
+        <script src="./jquery-2.2.4.min.js"></script>
+        <script src="./bootstrap.min.js"></script>
+        <script src="./moment.min.js"></script>
+        <script src="./climber_countdown.js"></script>
+        
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item active dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="settingsDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Settings
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="settingsDropdownMenuLink">
+                      <div class="container-fluid">
+                            <div class="form-group">
+                                <label for="climbTimeSeconds">Climb Seconds</label>
+                                <div class="input-group">
+                                    <input type="text" id="climbTimeSeconds" class="form-control input-sm" placeholder="Climb Seconds" value="240">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container-fluid">
+                            <div class="form-group">
+                                <label for="transitionTimeSeconds">Transition Seconds</label>
+                                <div class="input-group">
+                                    <input type="text" id="transitionTimeSeconds" class="form-control input-sm" placeholder="Transition Seconds" value="60">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container-fluid">
+                            <div class="form-group">
+                                <label for="compStartTime">Comp Start Time</label>
+                                <div class="input-group">
+                                    <input type="text" id="compStartTime" class="form-control input-sm" placeholder="hh:mm 24 hour format" value="09:00">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container-fluid">
+                            <button type="button" class="btn btn-default btn-default" id="startStopButton" onclick="startStopButtonPressed();">Start</button>
+                        </div>
+                  </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="downloadDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Download
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="downloadDropdownMenuLink">
+                            <div class="container-fluid">
+                                  Go to the link below and select "Download Repository" to download the zip file. 
+                                  Extract the zip file to your computer and double click index.html to start the app locally without need for internet access.
+                            </div>
+      
+                            <div class="container-fluid">
+                                <a class="nav-link" href="https://bitbucket.org/m2ware/climber_countdown/downloads/">Download Link</a>
+                            </div>
+                        </div>
+                      </li>
+            </div>
+          </nav>
+
+        <div class="container-fluid" name="content" id="">
+            <h4><div class="text-center climb" id="timePeriod">Climb</div></h4>
+        </div>
+
+        <div class="container-fluid" name="content" id="">
+            <h4><div class="text-center time" id="time">4:00</div></h4>
+        </div>
+
+        <audio id="beginClimbWithoutTimeCallAudio" src="./BeginClimbWithoutTimeCall.wav" preload="auto" muted="true" onended="this.muted = false;"></audio>
+        <audio id="beginClimbWithTimeCallAudio" src="./BeginClimbWithTimeCall.wav" preload="auto" muted="true" onended="this.muted = false;"></audio>
+        <audio id="beginTransitionAudio" src="./BeginTransition.wav" preload="auto" muted="true" onended="this.muted = false;"></audio>
+        <audio id="oneMinuteWarningAudio" src="./OneMinuteWarning.wav" preload="auto" muted="true" onended="this.muted = false;"></audio>
+        <audio id="tenSecondWarningAudio" src="./TenSecondWarning.wav" preload="auto" muted="true" onended="this.muted = false;"></audio>
+    </body>
+</html>
