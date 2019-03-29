@@ -140,6 +140,7 @@ function setStartTimeFromCompTime() {
 
     // Move it one day back if the startTime is now in the future
     if (startTime > moment()) {
+        console.log("Moving start time: " + startTime + " as current moment: " + moment())
         startTime.subtract(1, 'days');
     }
     console.log('CompStartTime: ' + startTime.format());
