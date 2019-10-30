@@ -147,8 +147,9 @@ function getSecondsToStartTransitionFromISO() {
 
 function setClockDrift() {
     var requestDate = new Date();
+    var url = `https://us-central1-golden-torch-153105.cloudfunctions.net/clockDrift?userDateTimeUST=${new Date().toISOString()}`;
     $.ajax({
-        url: 'https://us-central1-golden-torch-153105.cloudfunctions.net/clockDrift?userDateTimeUST=' + new Date().toISOString(),
+        url: url,
         type: 'GET',
         success: function(res) {
             var applyClockDrift = getApplyClockDrift();
