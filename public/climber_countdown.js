@@ -13,6 +13,9 @@ var test = false;
 var lastLocalDateTime = null;
 var clockDrift = 0.0;
 
+// Example url to encode a QR code
+// https://chart.googleapis.com/chart?cht=qr&chs=400x400&chl=climbercountdown.com/?climbTimeSeconds=300%26transitionTimeSeconds=0%26compStartTime=09%3A45%26applyClockDrift=true
+
 $(document).ready(function() {
     beginClimbWithoutTimeCallAudio = document.getElementById('beginClimbWithoutTimeCallAudio');
     beginClimbWithTimeCallAudio = document.getElementById('beginClimbWithTimeCallAudio');
