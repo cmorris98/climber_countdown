@@ -1,0 +1,39 @@
+.time {
+    color: white;
+    font-size: 35vmax;
+    font-family: Courier, 'Courier New', monospace;
+    font-weight: bolder;
+    -webkit-text-stroke: black;
+    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 2px;
+}
+
+.climb {
+    color: white;
+    font-size: 10vmax;
+    font-family: Courier, 'Courier New', monospace;
+    font-weight: bold;
+}
+
+.information {
+    color: white;
+    font-size: 3vmax;
+    font-family: Courier, 'Courier New', monospace;
+    font-weight: bold;
+}
+
+.timelow {
+    color: red;
+}
+
+.transition {
+    color: green;
+}
+
+body {
+    background-color: black;
+}
+
+.black-background {background-color:black;}
+
+.white {color:white;}

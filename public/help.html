@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="./bootstrap.min.css">
+
+        <title>Help</title>
+    </head>
+    <body>
+        <script src="./jquery.min.js"></script>
+        <script src="./bootstrap.bundle.min.js"></script>
+        <script src="./moment.min.js"></script>
+        <script src="./climber_countdown.js"></script>
+
+        <h1>Welcome to Climber Countdown</h1>
+        <br>
+        This application is meant for climbing competitions. In a nutshell you set the appropriate settings via the settings menu and hit Start.
+        The application will count down until the competition starts and let you know when climbers should be in ISO and when the first
+        climbers should come out to the chairs. It is recomended this application be run from a computer that has an internet connection
+        and is syncing time from an internet time source (all modern computers, phones, and tablets fit this criteria). Multiple computers, phones, and tablets 
+        will be synced as long as all the settings are the same. Once the settings of the primary computer are set, the link can be shared with others
+        which will automatically populate the same settings. 
+        This allows all volunteers, athletes, and spectators to have a synced timeclock availale if desired.
+        <br>
+        <br>
+        If necessary the application will run without an internet connection by first downloading the source repository from 
+        <a href="https://bitbucket.org/m2ware/climber_countdown/downloads/">here</a>
+        then unzipping and opening the index.html file.
+        <br>
+        <br>
+        Here is a descrption of the settings available.
+        <ul>
+            <li>Climb Seconds: Number of seconds the climber has to complete the climb</li>
+            <li>Transition Seconds: Number of seconds you would like for the transition period bewteen climbs. Set to 0 to turn off transitions.</li>
+            <li>Comp Start Time: The time at which the competition will start represented int hh:mm 24 hour format.</li>
+            <li>Cock Drift: Check this if you would like each device to attempt to compensate for internal clock drift by checking against a common server. 
+                In general this should not be checked since all modern computers sync against an internet time source to compensate for clock drift.</li>
+        </ul>
+        <br>
+        Troubleshooting
+        <ul>
+            <li>Devices out of sync: Make sure all devices have an active internet connection and are automatically syncing to an intenet time source</li>
+        </ul>
+    </body>
+</html>
