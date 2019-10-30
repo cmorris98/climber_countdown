@@ -18,5 +18,7 @@ exports.clockDrift = functions.https.onRequest((request, response) => {
     
     var clockDrift = userTimeUST - serverTimeUST;
     var functionExecutionTime = new Date() - serverTimeUST;
-    response.json({'serverTimeUST': serverTimeUST.toISOString(), 'clockDrift': clockDrift});
+    response.json({'serverTimeUST': serverTimeUST.toISOString(), 
+                   'clockDrift': clockDrift, 
+                   'functionExecutionTime': functionExecutionTime});
 });
