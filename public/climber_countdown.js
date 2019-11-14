@@ -12,6 +12,7 @@ var tenSecondWarningAudio = null;
 var test = false;
 var lastLocalDateTime = null;
 var clockDrift = 0.0;
+var noSleep = null;
 
 // Example url to encode a QR code
 // https://chart.googleapis.com/chart?cht=qr&chs=400x400&chl=climbercountdown.com/?climbTimeSeconds=300%26transitionTimeSeconds=0%26compStartTime=09%3A45%26applyClockDrift=true
@@ -69,6 +70,9 @@ $(document).ready(function() {
     setInterval(function(){
         setClockDrift();
     },30000);
+
+    // Create an object that will prevent mobile browsers from sleeping
+    noSleep = new NoSleep();
 });
 
 function writeParametersIntoURL() {
@@ -395,8 +399,10 @@ function startStopButtonPressed() {
         clearInterval(timeInterval);
         setTimePeriod();
         setButtonText();
+        noSleep.disable();
     } else {
         timerRunning = true;
+        noSleep.enable();
         hideSettingsContent();
         setTimePeriod();
         setButtonText();
@@ -408,7 +414,6 @@ function startStopButtonPressed() {
             setTimePeriod(secondsFromStart);
 
             if(isTimeUp(secondsFromStart)) {
-                // console.log('TimeUP!');
                 playTimeUpAudio(secondsFromStart);
                 logTestResults();
             }
