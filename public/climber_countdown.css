@@ -37,3 +37,7 @@ body {
 .black-background {background-color:black;}
 
 .white {color:white;}
+
+.qrcode {
+    width: 18rem;
+}

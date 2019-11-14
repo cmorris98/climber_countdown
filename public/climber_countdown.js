@@ -73,6 +73,9 @@ $(document).ready(function() {
 
     // Create an object that will prevent mobile browsers from sleeping
     noSleep = new NoSleep();
+
+    // Update the qr code image to what is in the url
+    updateQRCodeUrl();
 });
 
 function writeParametersIntoURL() {
@@ -82,6 +85,16 @@ function writeParametersIntoURL() {
     url.searchParams.set('compStartTime', getCompStartTime());
     url.searchParams.set('applyClockDrift', getApplyClockDrift());
     window.history.pushState(null, null, url);
+    updateQRCodeUrl();
+}
+
+function updateQRCodeUrl() {
+    var climbTimeSeconds = getClimbTimeSeconds().toString();
+    var transitionTimeSeconds = getTransitionTimeSeconds().toString();
+    var compStartTime = getCompStartTime().replace(':', '%3a');
+    var applyClockDrift = getApplyClockDrift();
+    var url = `https://chart.googleapis.com/chart?cht=qr&chs=400x400&chl=climbercountdown.com/?climbTimeSeconds=${climbTimeSeconds}%26transitionTimeSeconds=${transitionTimeSeconds}%26compStartTime=${compStartTime}%26applyClockDrift=${applyClockDrift}`;
+    $("#qrCodeImage").attr("src",url);
 }
 
 function getSecondsFromStart() {

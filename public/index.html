@@ -10,24 +10,29 @@
         <script src="./moment.min.js"></script>
         <script src="./climber_countdown.js"></script>
         <script src="./NoSleep.min.js"></script>
-
-        <title>Climber Countdown</title>
-    </head>
-    <body>
-
+        
         <!-- firebase stuff -->
         <script src="/__/firebase/7.2.2/firebase-app.js"></script>
         <script src="/__/firebase/7.2.2/firebase-analytics.js"></script>
         <script src="/__/firebase/init.js"></script>
-        
-        <p>
-            <button class="btn btn-secondary btn-sm black-background dropdown-toggle white" type="button" data-toggle="collapse" data-target="#settingsContent" aria-expanded="false" aria-controls="collapseExample">
-                Settings
-            </button>
-        </p>
+
+        <title>Climber Countdown</title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <button class="btn btn-secondary btn-sm black-background dropdown-toggle white" type="button" data-toggle="collapse" data-target="#settingsContent" aria-expanded="false" aria-controls="collapseSettings">
+                    Settings
+                </button>
+                
+                <button class="btn btn-secondary btn-sm black-background dropdown-toggle white" type="button" data-toggle="collapse" data-target="#qrCodeContent" aria-expanded="false" aria-controls="collapseQRCode">
+                    QR Code
+                </button>
+            </div>
+        </div>
 
         <div class="collapse" id="settingsContent">
-            <div class="card card-body">
+            <div class="card card-body black-background">
                 <div class="container">
                     <a href="help.html">Help</a>
                 </div>
@@ -72,7 +77,7 @@
                     <div class="container">
                         <div class="form-check form-check-inline">
                             <input type="checkbox" class="form-check-input" id="applyClockDrift">
-                            <label class="form-check-label" for="applyClockDrift" id="clockDrift">Apply Clock Drift: (0.0)</label>
+                            <label class="form-check-labe white" for="applyClockDrift" id="clockDrift">Apply Clock Drift: (0.0)</label>
                         </div>
                     </div>
                     <div class="dropdown-divider"></div>
@@ -82,7 +87,18 @@
                 </div>
             </div>
         </div>
-            
+        
+        <div class="collapse" id="qrCodeContent">
+            <div class="card card-body black-background">
+                <div class="card qrcode">
+                    <img id="qrCodeImage" src="./logo.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">QR Code</h5>
+                        <p class="card-text">Scan this code to nagivate to the timer app with matching settings.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container-fluid" name="content">
             <h4><div class="text-center climb" id="timePeriod">Climb</div></h4>
         </div>
@@ -90,7 +106,7 @@
         <div class="container-fluid" name="content">
             <h4><div class="text-center time" id="time">4:00</div></h4>
         </div>
-
+        
         <audio id="beginClimbWithoutTimeCallAudio" src="./BeginClimbWithoutTimeCall.wav" preload="auto" muted="true" onended="this.muted = false;"></audio>
         <audio id="beginClimbWithTimeCallAudio" src="./BeginClimbWithTimeCall.wav" preload="auto" muted="true" onended="this.muted = false;"></audio>
         <audio id="beginTransitionAudio" src="./BeginTransition.wav" preload="auto" muted="true" onended="this.muted = false;"></audio>
