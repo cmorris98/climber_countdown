@@ -21,22 +21,15 @@
     <body>
         <div class="container-fluid">
             <div class="row">
+                <button type="button" class="btn btn-sm btn-primary black-background white" id="startStopButton" onclick="startStopButtonPressed();">Start</button>
                 <button class="btn btn-secondary btn-sm black-background dropdown-toggle white" type="button" data-toggle="collapse" data-target="#settingsContent" aria-expanded="false" aria-controls="collapseSettings">
                     Settings
-                </button>
-                
-                <button class="btn btn-secondary btn-sm black-background dropdown-toggle white" type="button" data-toggle="collapse" data-target="#qrCodeContent" aria-expanded="false" aria-controls="collapseQRCode">
-                    QR Code
                 </button>
             </div>
         </div>
 
         <div class="collapse" id="settingsContent">
             <div class="card card-body black-background">
-                <div class="container">
-                    <a href="help.html">Help</a>
-                </div>
-                <div class="dropdown-divider"></div>
                 <div class="form-group">
                     <div class="container">
                         <div class="row">
@@ -82,23 +75,37 @@
                     </div>
                     <div class="dropdown-divider"></div>
                     <div class="container">
-                        <button type="button" class="btn btn-primary" id="startStopButton" onclick="startStopButtonPressed();">Start</button>
+                        <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#qrCodeContent" aria-expanded="false" aria-controls="collapseQRCode">
+                            QR Code
+                        </button>
+                        <a class="btn btn-secondary" role="button" href="help.html">Help</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="qrCodeContent" tabindex="-1" role="dialog" aria-labelledby="qrContentModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">QR Code</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img id="qrCodeImage" src="./logo.png" class="card-img-top" alt="...">
+                        Scan this code to navigate to climber countdown with the matching settings
+                    </div>
+
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="collapse" id="qrCodeContent">
-            <div class="card card-body black-background">
-                <div class="card qrcode">
-                    <img id="qrCodeImage" src="./logo.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">QR Code</h5>
-                        <p class="card-text">Scan this code to nagivate to the timer app with matching settings.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="container-fluid" name="content">
             <h4><div class="text-center climb" id="timePeriod">Climb</div></h4>
         </div>
