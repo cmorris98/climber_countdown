@@ -5,66 +5,77 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="./bootstrap.min.css">
         <link rel="stylesheet" href="./climber_countdown.css"/>
-
-        <title>Climber Countdown</title>
-    </head>
-    <body>
         <script src="./jquery.min.js"></script>
         <script src="./bootstrap.bundle.min.js"></script>
         <script src="./moment.min.js"></script>
         <script src="./climber_countdown.js"></script>
+
+        <title>Climber Countdown</title>
+    </head>
+    <body>
 
         <!-- firebase stuff -->
         <script src="/__/firebase/7.2.2/firebase-app.js"></script>
         <script src="/__/firebase/7.2.2/firebase-analytics.js"></script>
         <script src="/__/firebase/init.js"></script>
         
-        <div class="buttons">
-            <div class="btn-group">
-                <button type="button" class="btn btn-secondary btn-sm dropdown-toggle black-background white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Settings
-                </button>
-                <div class="dropdown-menu">
-                    <div class="container-fluid">
-                        <a href="help.html">Help</a>
-                    </div>
-                    <div class="dropdown-divider"></div>
-                    <div class="container-fluid">
-                        <div class="form-group">
-                            <label for="climbTimeSeconds">Climb Seconds</label>
-                            <div class="input-group">
-                                <input type="text" id="climbTimeSeconds" class="form-control input-sm" placeholder="Climb Seconds" value="240">
+        <p>
+            <button class="btn btn-secondary btn-sm black-background dropdown-toggle white" type="button" data-toggle="collapse" data-target="#settingsContent" aria-expanded="false" aria-controls="collapseExample">
+                Settings
+            </button>
+        </p>
+
+        <div class="collapse" id="settingsContent">
+            <div class="card card-body">
+                <div class="container">
+                    <a href="help.html">Help</a>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="form-group">
+                    <div class="container">
+                        <div class="row">
+                            <div class="input-group mb-3 col-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Climb Seconds</span>
+                                </div>
+                                <input type="text" id="climbTimeSeconds" class="form-control" aria-label="Climb Seconds" value="240">
+                                <div class="input-group-append" id="button-addon4">
+                                    <button class="btn btn-outline-secondary" type="button" onclick="adjustClimbSeconds(30);">+</button>
+                                    <button class="btn btn-outline-secondary" type="button" onclick="adjustClimbSeconds(-30);">-</button>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3 col-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Transition Seconds</span>
+                                </div>
+                                <input type="text" id="transitionTimeSeconds" class="form-control" aria-label="Transition Seconds" value="60">
+                                <div class="input-group-append" id="button-addon4">
+                                    <button class="btn btn-outline-secondary" type="button" onclick="adjustTransitionTimeSeconds(15);">+</button>
+                                    <button class="btn btn-outline-secondary" type="button" onclick="adjustTransitionTimeSeconds(-15);">-</button>
+                                </div>
+                            </div>
+
+                            <div class="input-group mb-3 col-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Comp Start Time</span>
+                                </div>
+                                <input type="text" id="compStartTime" class="form-control" aria-label="Competition Start Time" placeholder="hh:mm 24 hour format" value="09:00">
+                                <div class="input-group-append" id="button-addon4">
+                                    <button class="btn btn-outline-secondary" type="button" onclick="adjustCompStartTime(15);">+</button>
+                                    <button class="btn btn-outline-secondary" type="button" onclick="adjustCompStartTime(-15);">-</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="dropdown-divider"></div>
-                    <div class="container-fluid">
-                        <div class="form-group">
-                            <label for="transitionTimeSeconds">Transition Seconds</label>
-                            <div class="input-group">
-                                <input type="text" id="transitionTimeSeconds" class="form-control input-sm" placeholder="Transition Seconds" value="60">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dropdown-divider"></div>
-                    <div class="container-fluid">
-                        <div class="form-group">
-                            <label for="compStartTime">Comp Start Time</label>
-                            <div class="input-group">
-                                <input type="text" id="compStartTime" class="form-control input-sm" placeholder="hh:mm 24 hour format" value="09:00">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dropdown-divider"></div>
-                    <div class="container-fluid">
-                        <div class="form-group form-check">
+                    <div class="container">
+                        <div class="form-check form-check-inline">
                             <input type="checkbox" class="form-check-input" id="applyClockDrift">
-                            <label class="form-check-label" for="applyClockDrift">Clock Drift</label>
+                            <label class="form-check-label" for="applyClockDrift" id="clockDrift">Apply Clock Drift: (0.0)</label>
                         </div>
-                        <div class="text" id="clockDrift">Drift: 0</div>
                     </div>
                     <div class="dropdown-divider"></div>
-                    <div class="container-fluid">
+                    <div class="container">
                         <button type="button" class="btn btn-primary" id="startStopButton" onclick="startStopButtonPressed();">Start</button>
                     </div>
                 </div>

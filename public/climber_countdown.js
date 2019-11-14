@@ -100,6 +100,7 @@ function compStarted(secondsFromStart) {
 function setClimbTimeSeconds(climbTimeSeconds) {
     if (climbTimeSeconds) {
         $('#climbTimeSeconds').val(climbTimeSeconds);
+        writeParametersIntoURL();
     }
 }
 
@@ -114,6 +115,7 @@ function getClimbTimeSeconds() {
 function setTransitionTimeSeconds(transitionTimeSeconds) {
     if (transitionTimeSeconds) {
         $('#transitionTimeSeconds').val(transitionTimeSeconds);
+        writeParametersIntoURL();
     }
 }
 
@@ -128,6 +130,7 @@ function getTransitionTimeSeconds() {
 function setCompStartTime(compStartTime) {
     if (compStartTime) {
         $('#compStartTime').val(compStartTime);
+        writeParametersIntoURL();
     }
 }
 
@@ -164,7 +167,7 @@ function setClockDrift() {
             } else {
                 calculatedClockDrift = res.clockDrift - roundTripTime / 2.0;
             }
-            $('#clockDrift').html('Drift: ' + calculatedClockDrift);
+            $('#clockDrift').html('Apply Clock Drift: (' + calculatedClockDrift + ')');
             if (applyClockDrift) {
                 clockDrift = calculatedClockDrift;
             } else {
@@ -394,6 +397,7 @@ function startStopButtonPressed() {
         setButtonText();
     } else {
         timerRunning = true;
+        hideSettingsContent();
         setTimePeriod();
         setButtonText();
 
@@ -410,6 +414,25 @@ function startStopButtonPressed() {
             }
         },100);
     }
+}
+
+function hideSettingsContent() {
+    $('#settingsContent').collapse('hide');
+}
+
+function adjustClimbSeconds(adjustmentSeconds) {
+    var climbTimeSeconds = getClimbTimeSeconds() + adjustmentSeconds;
+    setClimbTimeSeconds(climbTimeSeconds);
+}
+
+function adjustTransitionTimeSeconds(adjustmentSeconds) {
+    var transitionTimeSeconds = getTransitionTimeSeconds() + adjustmentSeconds;
+    setTransitionTimeSeconds(transitionTimeSeconds);
+}
+
+function adjustCompStartTime(adjustmentMinutes) {
+    startTime.add(adjustmentMinutes, 'minutes');
+    setCompStartTime(startTime.format('HH:mm'));
 }
 
 function soundTestButtonPressed() {
