@@ -80,7 +80,7 @@ function writeParametersIntoURL() {
     url.searchParams.set('climbTimeSeconds', getClimbTimeSeconds().toString());
     url.searchParams.set('transitionTimeSeconds', getTransitionTimeSeconds().toString());
     url.searchParams.set('compStartTime', getCompStartTime());
-    url.searchParams.set('applyClockDrift', getApplyClockDrift());
+    url.searchParams.set('applyClockDrift', getApplyClockDrift());fire
     window.history.pushState(null, null, url);
     updateQRCodeUrl();
 }
@@ -160,9 +160,9 @@ function setApplyClockDrift(applyClockDrift) {
     $('#applyClockDrift').prop('checked', applyClockDrift);
 }
 
-// Allow an extra 30 seconds to transition from ISO and be in the chair with a full climb time remaining
+// First climbers should be out at the climb time plus transition time
 function getSecondsToStartTransitionFromISO() {
-    return getClimbTimeSeconds() + 30;
+    return getClimbTimeSeconds() + getTransitionTimeSeconds();
 }
 
 function setClockDrift() {
