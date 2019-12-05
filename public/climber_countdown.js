@@ -80,7 +80,7 @@ function writeParametersIntoURL() {
     url.searchParams.set('climbTimeSeconds', getClimbTimeSeconds().toString());
     url.searchParams.set('transitionTimeSeconds', getTransitionTimeSeconds().toString());
     url.searchParams.set('compStartTime', getCompStartTime());
-    url.searchParams.set('applyClockDrift', getApplyClockDrift());fire
+    url.searchParams.set('applyClockDrift', getApplyClockDrift());
     window.history.pushState(null, null, url);
     updateQRCodeUrl();
 }
@@ -127,10 +127,8 @@ function getClimbTimeSeconds() {
 }
 
 function setTransitionTimeSeconds(transitionTimeSeconds) {
-    if (transitionTimeSeconds) {
-        $('#transitionTimeSeconds').val(transitionTimeSeconds);
-        writeParametersIntoURL();
-    }
+    $('#transitionTimeSeconds').val(transitionTimeSeconds);
+    writeParametersIntoURL();
 }
 
 function getTransitionTimeSeconds() {
@@ -441,7 +439,7 @@ function adjustClimbSeconds(adjustmentSeconds) {
 }
 
 function adjustTransitionTimeSeconds(adjustmentSeconds) {
-    var transitionTimeSeconds = getTransitionTimeSeconds() + adjustmentSeconds;
+    var transitionTimeSeconds = Math.max(getTransitionTimeSeconds() + adjustmentSeconds, 0);
     setTransitionTimeSeconds(transitionTimeSeconds);
 }
 
