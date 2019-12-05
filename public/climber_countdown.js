@@ -127,8 +127,10 @@ function getClimbTimeSeconds() {
 }
 
 function setTransitionTimeSeconds(transitionTimeSeconds) {
-    $('#transitionTimeSeconds').val(transitionTimeSeconds);
-    writeParametersIntoURL();
+    if (transitionTimeSeconds != null) {
+        $('#transitionTimeSeconds').val(transitionTimeSeconds);
+        writeParametersIntoURL();
+    }
 }
 
 function getTransitionTimeSeconds() {
