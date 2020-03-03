@@ -104,7 +104,7 @@ function getRemainingSeconds(secondsFromStart) {
 
 function inTransition(secondsFromStart) {
     var remainingSeconds = getRemainingSeconds(secondsFromStart);
-    return (getClimbTimeSeconds() < remainingSeconds);
+    return (getClimbTimeSeconds() < remainingSeconds || !compStarted(secondsFromStart));
 }
 
 function compStarted(secondsFromStart) {
@@ -147,7 +147,7 @@ function setCompStartTime(compStartTime) {
         writeParametersIntoURL();
     }
 }
-
+ 
 function getCompStartTime() {
     return $('#compStartTime').val();
 }
@@ -285,7 +285,9 @@ function setSoundTestButtonText() {
 }
 
 function setTimePeriod(secondsRemaining) {
-    if (secondsRemaining < 0) {
+    var transitionTimeSeconds = getTransitionTimeSeconds();
+
+    if (secondsRemaining < 0 - transitionTimeSeconds) {
         var notificationString = `Climbing starts at ${getCompStartTime()}`;
         notificationString += `<br>Current Time: ${moment().format('HH:mm')}`;
         // Add a notification that climbers should be in chairs we if have climbing + 30 seconds to go from
@@ -339,15 +341,21 @@ function playTimeWarningAudio(secondsFromStart) {
             oneMinuteWarningAudio.play();
         }
     } else {
-        // The comp has not yet started, so play audio as needed to alert the transition from ISO as well as a 1 minute and 10 second warning
+        // The comp has not yet started, so play audio as needed 
+        // If there is no transition then call out the time to come out from ISO plus a one minute and 10 second
+        // If there is a transition then call out
         var remainingSeconds = Math.ceil(secondsFromStart);
+        var hasTransition = getTransitionTimeSeconds() > 0;
         // console.log(`playTimeWarningAudio compNotStarted secondsFromStart: ${secondsFromStart}, remainingSeconds: ${remainingSeconds}`);
 
-        if (remainingSeconds == -10) {
+        var transitionTimeSeconds = getTransitionTimeSeconds();
+        if (remainingSeconds == -10 - transitionTimeSeconds) {
             tenSecondWarningAudio.play();
-        } else if (remainingSeconds == -60) {
+        } else if (remainingSeconds == -60 - transitionTimeSeconds) {
             oneMinuteWarningAudio.play();
         } else if (remainingSeconds == -getSecondsToStartTransitionFromISO()) {
+            beginTransitionAudio.play();
+        } else if (hasTransition && remainingSeconds == -transitionTimeSeconds) {
             beginTransitionAudio.play();
         }
     }
