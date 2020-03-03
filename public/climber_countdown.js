@@ -287,7 +287,7 @@ function setSoundTestButtonText() {
 function setTimePeriod(secondsRemaining) {
     var transitionTimeSeconds = getTransitionTimeSeconds();
 
-    if (secondsRemaining < 0 - transitionTimeSeconds) {
+    if (secondsRemaining < 0 - transitionTimeSeconds - 1) {
         var notificationString = `Climbing starts at ${getCompStartTime()}`;
         notificationString += `<br>Current Time: ${moment().format('HH:mm')}`;
         // Add a notification that climbers should be in chairs we if have climbing + 30 seconds to go from
