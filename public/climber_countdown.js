@@ -181,7 +181,7 @@ function setClockDrift() {
             } else {
                 calculatedClockDrift = res.clockDrift - roundTripTime / 2.0;
             }
-            $('#clockDrift').html('Apply Clock Drift: (' + calculatedClockDrift + ')');
+            $('#clockDrift').html('Clock Drift: (' + calculatedClockDrift + ')');
             if (applyClockDrift) {
                 clockDrift = calculatedClockDrift;
             } else {

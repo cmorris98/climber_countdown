@@ -22,6 +22,16 @@
     font-weight: bold;
 }
 
+.increment-button {
+    color: green;
+    background-color: white;
+}
+
+.decrement-button {
+    color: red;
+    background-color: white;
+}
+
 .timelow {
     color: red;
 }
