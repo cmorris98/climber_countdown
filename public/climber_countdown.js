@@ -11,7 +11,6 @@ var oneMinuteWarningAudio = null;
 var tenSecondWarningAudio = null;
 var test = false;
 var lastLocalDateTime = null;
-var clockDrift = 0.0;
 var noSleep = null;
 
 $(document).ready(function() {
@@ -31,7 +30,6 @@ $(document).ready(function() {
     setClimbTimeSeconds(url.searchParams.get('climbTimeSeconds'));
     setTransitionTimeSeconds(url.searchParams.get('transitionTimeSeconds'));
     setCompStartTime(url.searchParams.get('compStartTime'));
-    setApplyClockDrift(url.searchParams.get('applyClockDrift') == 'true');
 
     // Udate the start time if the user has changed the climb time
     $('#climbTimeSeconds').change(function() {
@@ -51,12 +49,6 @@ $(document).ready(function() {
     $('#compStartTime').change(function() {
         console.log('startTime changed');
         setStartTimeFromCompTime();
-        writeParametersIntoURL();
-    });
-
-    // Udate the url if the user has changed the clock drift
-    $('#applyClockDrift').change(function() {
-        console.log('applyClockDrift changed');
         writeParametersIntoURL();
     });
 
@@ -80,22 +72,21 @@ function writeParametersIntoURL() {
     url.searchParams.set('climbTimeSeconds', getClimbTimeSeconds().toString());
     url.searchParams.set('transitionTimeSeconds', getTransitionTimeSeconds().toString());
     url.searchParams.set('compStartTime', getCompStartTime());
-    url.searchParams.set('applyClockDrift', getApplyClockDrift());
     window.history.pushState(null, null, url);
     updateQRCodeUrl();
 }
 
 function updateQRCodeUrl() {
-    var climbTimeSeconds = getClimbTimeSeconds().toString();
-    var transitionTimeSeconds = getTransitionTimeSeconds().toString();
-    var compStartTime = getCompStartTime().replace(':', '%3a');
-    var applyClockDrift = getApplyClockDrift();
-    var url = `https://chart.googleapis.com/chart?cht=qr&chs=400x400&chl=climbercountdown.com/?climbTimeSeconds=${climbTimeSeconds}%26transitionTimeSeconds=${transitionTimeSeconds}%26compStartTime=${compStartTime}%26applyClockDrift=${applyClockDrift}`;
+    // var climbTimeSeconds = getClimbTimeSeconds().toString();
+    // var transitionTimeSeconds = getTransitionTimeSeconds().toString();
+    // var compStartTime = getCompStartTime().replace(':', '%3a');
+    var url = window.location.href; //`https://chart.googleapis.com/chart?cht=qr&chs=400x400&chl=https://climbercountdown.com/?climbTimeSeconds=${climbTimeSeconds}%26transitionTimeSeconds=${transitionTimeSeconds}%26compStartTime=${compStartTime}`;
+    console.log(`QRCode URL: ${url}`);
     $("#qrCodeImage").attr("src",url);
 }
 
 function getSecondsFromStart() {
-    return (moment().diff(startTime) + clockDrift) / 1000;
+    return moment().diff(startTime) / 1000;
 }
 
 function getRemainingSeconds(secondsFromStart) {
@@ -152,14 +143,6 @@ function getCompStartTime() {
     return $('#compStartTime').val();
 }
 
-function getApplyClockDrift() {
-    return document.getElementById('applyClockDrift').checked;
-}
-
-function setApplyClockDrift(applyClockDrift) {
-    $('#applyClockDrift').prop('checked', applyClockDrift);
-}
-
 // First climbers should be out at the climb time plus transition time
 function getSecondsToStartTransitionFromISO() {
     return getClimbTimeSeconds() + getTransitionTimeSeconds();
@@ -172,8 +155,7 @@ function setClockDrift() {
         url: url,
         type: 'GET',
         success: function(res) {
-            var applyClockDrift = getApplyClockDrift();
-            console.log(`setClockDrift: applyClockDrift: ${applyClockDrift} Success ${JSON.stringify(res)}`);
+            console.log(`setClockDrift: Success ${JSON.stringify(res)}`);
             var roundTripTime = (new Date() - requestDate) + res.functionExecutionTime;
             var calculatedClockDrift = 0.0;
             if (res.clockDrift < 0) {
@@ -182,11 +164,6 @@ function setClockDrift() {
                 calculatedClockDrift = res.clockDrift - roundTripTime / 2.0;
             }
             $('#clockDrift').html('Clock Drift: (' + calculatedClockDrift + ')');
-            if (applyClockDrift) {
-                clockDrift = calculatedClockDrift;
-            } else {
-                clockDrift = 0;
-            }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             console.log('setClockDrift: Error ' + errorThrown);
