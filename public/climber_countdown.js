@@ -80,7 +80,8 @@ function updateQRCodeUrl() {
     // var climbTimeSeconds = getClimbTimeSeconds().toString();
     // var transitionTimeSeconds = getTransitionTimeSeconds().toString();
     // var compStartTime = getCompStartTime().replace(':', '%3a');
-    var url = window.location.href; //`https://chart.googleapis.com/chart?cht=qr&chs=400x400&chl=https://climbercountdown.com/?climbTimeSeconds=${climbTimeSeconds}%26transitionTimeSeconds=${transitionTimeSeconds}%26compStartTime=${compStartTime}`;
+    // var url = `https://chart.googleapis.com/chart?cht=qr&chs=400x400&chl=https://climbercountdown.com/?climbTimeSeconds=${climbTimeSeconds}%26transitionTimeSeconds=${transitionTimeSeconds}%26compStartTime=${compStartTime}`;
+    var url = `https://chart.googleapis.com/chart?cht=qr&chs=400x400&chl=${encodeURI(window.location.href)}`;
     console.log(`QRCode URL: ${url}`);
     $("#qrCodeImage").attr("src",url);
 }
